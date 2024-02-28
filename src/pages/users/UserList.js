@@ -34,7 +34,7 @@ const UserList = () => {
 
 
       <div className="  p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
-      <h1 className="text-xl font-semibold">Liste des utilisateurs</h1>
+        <h1 className="text-xl font-semibold">Liste des utilisateurs</h1>
         <div className="flex justify-between items-center px-5">
           <div className="mb-5">
             <InputText
@@ -70,15 +70,15 @@ const UserList = () => {
                     {users.map((user) => (
                       <tr key={user.name}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <a className="text-blue-500 hover:cursor-pointer" >{user.name}</a>
+                          <a className="text-rose-500 hover:cursor-pointer font-medium" >{user.name}</a>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-medium">
                           {user.name}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-medium">
                           {user.name}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-medium">
                           {user.name}
                         </td>
                       </tr>

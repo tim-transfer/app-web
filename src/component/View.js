@@ -1,8 +1,6 @@
 const View = ({ children }) => {
-
-
     return (
-        <div className="w-screen mt-5 ml-5">
+        <div className="w-screen mt-20 ml-5">
             { children }
         </div>
     )

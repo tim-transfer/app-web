@@ -70,15 +70,15 @@ const CompanyList = () => {
                     {users.map((user) => (
                       <tr key={user.name}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <a className="text-blue-500 hover:cursor-pointer" >{user.name}</a>
+                          <a className="text-rose-500 hover:cursor-pointer font-medium" >{user.name}</a>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-medium">
                           {user.name}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-medium">
                           {user.name}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-medium">
                           {user.name}
                         </td>
                       </tr>
