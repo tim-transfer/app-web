@@ -14,7 +14,9 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
+    {localStorage.getItem('token') != null &&
     <Menu />
+}
       <App />
   </React.StrictMode>
 );// If you want to start measuring performance in your app, pass a function

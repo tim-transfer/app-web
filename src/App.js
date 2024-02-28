@@ -9,24 +9,25 @@ import {
 import "./index.css";
 import routes from "./routes/index"
 import Menu from './component/Menu';
+import axios from 'axios';
 
 const App = () => {
-  // const [data, setData] = useState(null);
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+  const [data, setData] = React.useState(null);
 
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await axios.get('http://localhost:8000/api/data');
-  //     setData(response.data);
-  //     console.log(data)
-  //   } catch (error) {
-  //     console.error('Error fetching data:', error);
-  //   }
-  // };
+  React.useEffect(() => {
+    fetchData();
+  }, []);
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:8000/api/data');
+      setData(response.data);
+      console.log(data)
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 };
 
 export default App;
