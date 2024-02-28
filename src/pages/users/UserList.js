@@ -67,10 +67,10 @@ const UserList = () => {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {users.map((user) => (
-                      <tr key={user.name}>
+                    {users.map((user, index) => (
+                      <tr key={index}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <a className="text-rose-500 hover:cursor-pointer font-medium" >{user.name}</a>
+                          <a className="text-rose-400 hover:cursor-pointer font-medium" >{user.name}</a>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-medium">
                           {user.name}
