@@ -28,6 +28,7 @@ const App = () => {
       console.error('Error fetching data:', error);
     }
   };
+
 };
 
 export default App;

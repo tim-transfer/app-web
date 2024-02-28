@@ -55,7 +55,7 @@ const Login = () => {
                   </form>
         
                   <p className="mt-10 text-center text-sm text-gray-500">
-                    Not a member?{' '}
+                    Vous n'êtes pas un membre ?{' '}
                     <a href="/registration" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
                       Inscrivez-vous ! 
                     </a>
