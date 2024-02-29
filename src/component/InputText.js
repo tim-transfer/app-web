@@ -1,6 +1,7 @@
 import React from 'react';
 
-const InputText = ({ type, label, value,placeholder="" }) => {
+const InputText = ({ type, label, value,placeholder="", onChange }) => {
+
   return (
     <div className="mt-2">
       <label htmlFor="component" className="block text-sm font-medium leading-6 text-gray-900">
@@ -10,6 +11,7 @@ const InputText = ({ type, label, value,placeholder="" }) => {
         id="component"
         type={type}
         value={value}
+        onChange={onChange}
         className="
           block w-full rounded-md 
           border-gray-300 

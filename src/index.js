@@ -14,7 +14,7 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root")).render(
   <div className='flex flex-row'>
     <React.StrictMode>
-      {localStorage.getItem('token') == null &&
+      {localStorage.getItem('token') != null &&
         <Menu />
       }
       <RouterProvider router={router} />
