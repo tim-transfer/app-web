@@ -13,6 +13,7 @@ const Login = () => {
     const response = await apiRequest({url : "/auth/login", method: "POST", data :{ email, password }});
     if (response.data.result == true) {
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("idUser", response.data.idUser);
       navigate('/dashboard')
     }
   }
