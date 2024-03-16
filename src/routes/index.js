@@ -5,10 +5,11 @@ import ErrorPage from "./error-pages";
 import Registration from "../auth/Registration";
 import CompanyList from "../pages/company/CompanyList";
 import UserList from "../pages/users/UserList";
-import CompanyAddContainer from "../pages/company/companyAddPage/CompanyAddContainer"
+import CompanyAddContainer from "../pages/company/companyAddPage/CompanyAddContainer";
+import UserAddContainer from "../pages/users/userAddPage/UserAddContainer";
 
 const isAuthenticated = () => {
-  return localStorage.getItem('token') != null;
+  return localStorage.getItem("token") != null;
 };
 const ProtectedRoute = () => {
   return isAuthenticated() ? (
@@ -21,37 +22,40 @@ const ProtectedRoute = () => {
 // Définition des routes
 const routes = [
   {
-    path: '/',
+    path: "/",
     element: <ProtectedRoute />,
   },
   {
-    path: '/login',
+    path: "/login",
     element: <Login />,
   },
   {
-    path: '/registration',
+    path: "/registration",
     element: <Registration />,
   },
   {
-    path: '/dashboard',
+    path: "/dashboard",
     element: <Dashboard />,
   },
   {
-    path: '*',
+    path: "*",
     element: <ErrorPage />,
   },
   {
-    path: '/companies',
+    path: "/companies",
     element: <CompanyList />,
   },
   {
-    path: '/users',
+    path: "/users",
     element: <UserList />,
   },
   {
     path: "company/companyAddPage",
-    element : <CompanyAddContainer />
-  }
+    element: <CompanyAddContainer />,
+  },
+  {
+    path: "user/add",
+    element: <UserAddContainer />,
+  },
 ];
 export default routes;
-
