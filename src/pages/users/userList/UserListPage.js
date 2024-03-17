@@ -4,7 +4,7 @@ import InputText from "./../../../component/InputText";
 import SidebarAddOrEdit from "./../../../component/SidebarAddOrEdit";
 import LinkButton from "../../../component/LinkButton";
 
-const UserListPage = ({ listUser, handleConfirmDelete }) => {
+const UserListPage = ({ listUser, handleConfirmDelete, handleUpdate }) => {
   return (
     <View>
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
@@ -85,7 +85,10 @@ const UserListPage = ({ listUser, handleConfirmDelete }) => {
                           {user.isAdmin ? "Admin" : "Utilisateur"}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <button className="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                          <button
+                            className="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            onClick={() => handleUpdate(user.id)}
+                          >
                             Modifier
                           </button>
                           <button

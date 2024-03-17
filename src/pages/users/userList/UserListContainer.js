@@ -9,6 +9,10 @@ const UserListContainer = () => {
     loadData();
   }, []);
 
+  const handleUpdate = (userId) => {
+    window.location.href = `/user/update/${userId}`;
+  };
+
   const handleConfirmDelete = (userId, userEmail) => {
     if (
       window.confirm(
@@ -74,7 +78,13 @@ const UserListContainer = () => {
     }
   };
 
-  return <UserListPage listUser={listUser} handleConfirmDelete={handleConfirmDelete} />;
+  return (
+    <UserListPage
+      listUser={listUser}
+      handleConfirmDelete={handleConfirmDelete}
+      handleUpdate={handleUpdate}
+    />
+  );
 };
 
 export default UserListContainer;

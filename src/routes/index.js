@@ -1,4 +1,4 @@
-import { Navigate, Route } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Login from "../auth/Login";
 import Dashboard from "../pages/dashboard/Dashboard";
 import ErrorPage from "./error-pages";
@@ -7,6 +7,7 @@ import CompanyList from "../pages/company/CompanyList";
 import CompanyAddContainer from "../pages/company/companyAddPage/CompanyAddContainer";
 import UserAddContainer from "../pages/users/userAddPage/UserAddContainer";
 import UserListContainer from "../pages/users/userList/UserListContainer";
+import UserUpdateContainer from "../pages/users/userUpdate/UserUpdateContainer";
 
 const isAuthenticated = () => {
   return localStorage.getItem("token") != null;
@@ -56,6 +57,10 @@ const routes = [
   {
     path: "users",
     element: <UserListContainer />,
+  },
+  {        
+    path: "user/update/:idParamInContainer",
+    element: <UserUpdateContainer />,
   },
 ];
 export default routes;
