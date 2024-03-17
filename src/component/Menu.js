@@ -21,7 +21,7 @@ const Menu = () => {
       name: "Ajout entreprise",
       route: "/company/companyAddPage",
       icon: HiOutlineOfficeBuilding
-    }
+    },
   ];
 
   return (

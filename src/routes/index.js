@@ -4,9 +4,9 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import ErrorPage from "./error-pages";
 import Registration from "../auth/Registration";
 import CompanyList from "../pages/company/CompanyList";
-import UserList from "../pages/users/UserList";
 import CompanyAddContainer from "../pages/company/companyAddPage/CompanyAddContainer";
 import UserAddContainer from "../pages/users/userAddPage/UserAddContainer";
+import UserListContainer from "../pages/users/userList/UserListContainer";
 
 const isAuthenticated = () => {
   return localStorage.getItem("token") != null;
@@ -46,16 +46,16 @@ const routes = [
     element: <CompanyList />,
   },
   {
-    path: "/users",
-    element: <UserList />,
-  },
-  {
     path: "company/companyAddPage",
     element: <CompanyAddContainer />,
   },
   {
     path: "user/add",
     element: <UserAddContainer />,
+  },
+  {
+    path: "users",
+    element: <UserListContainer />,
   },
 ];
 export default routes;

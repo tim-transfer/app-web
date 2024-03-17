@@ -60,7 +60,7 @@ const UserAddContainer = () => {
       });
 
       if (result.status == 200) {
-        window.location.reload();
+        window.location.href="/users"
       } else if (result.status == 400) {
         console.error(result.error);
         alert.eror(result.error);
