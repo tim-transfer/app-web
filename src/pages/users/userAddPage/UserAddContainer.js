@@ -11,7 +11,13 @@ const UserAddContainer = () => {
     tempPassword: "",
     companyId: "",
     email: "",
+    isAdmin: false,
   });
+
+  const [listRoles, setListRoles] = useState([
+    { value: true, text: "Administrateur" },
+    { value: false, text: "Utilisateur" },
+  ]);
 
   useEffect(() => {
     loadData();
@@ -51,6 +57,7 @@ const UserAddContainer = () => {
         password: formData.tempPassword,
         companyId: formData.companyId,
         email: formData.email,
+        isAdmin: formData.isAdmin,
       };
 
       const result = await apiRequest({
@@ -60,7 +67,7 @@ const UserAddContainer = () => {
       });
 
       if (result.status == 200) {
-        window.location.href="/users";
+        window.location.href = "/users";
       } else if (result.status == 400) {
         console.error(result.error);
         alert.eror(result.error);
@@ -82,6 +89,7 @@ const UserAddContainer = () => {
       handleChange={handleChange}
       handleSubmit={handleSubmit}
       formData={formData}
+      listRoles={listRoles}
     />
   );
 };

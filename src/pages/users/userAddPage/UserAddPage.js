@@ -1,7 +1,12 @@
-
 import View from "./../../../component/View";
 
-const UserAddPage = ({ listCompany, handleChange, handleSubmit, formData }) => {
+const UserAddPage = ({
+  listCompany,
+  handleChange,
+  handleSubmit,
+  formData,
+  listRoles,
+}) => {
   return (
     <View>
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
@@ -97,6 +102,27 @@ const UserAddPage = ({ listCompany, handleChange, handleSubmit, formData }) => {
               {listCompany.map((company) => (
                 <option key={company.id} value={company.id}>
                   {company.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="isAdmin"
+              className="block text-sm font-medium text-gray-600"
+            >Rôle</label>
+            <select
+              id="isAdmin"
+              name="isAdmin"
+              value={formData.isAdmin}
+              onChange={handleChange}
+              className="mt-1 p-2 border rounded-md w-full"
+              required
+            >
+              <option value="">Sélectionnez un rôle</option>
+              {listRoles.map((role) => (
+                <option key={role.value} value={role.value}>
+                  {role.text}
                 </option>
               ))}
             </select>

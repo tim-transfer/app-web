@@ -11,7 +11,13 @@ const UserUpdateContainer = () => {
     lastName: "",
     email: "",
     companyId: "",
+    isAdmin: false,
   });
+
+  const [listRoles, setListRoles] = useState([
+    { value: true, text: "Administrateur" },
+    { value: false, text: "Utilisateur" },
+  ]);
 
   const [listCompany, setListCompany] = useState([]);
 
@@ -81,6 +87,7 @@ const UserUpdateContainer = () => {
       handleChange={handleChange}
       handleSubmit={handleSubmit}
       formData={user}
+      listRoles={listRoles}
     />
   );
 };
