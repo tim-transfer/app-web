@@ -10,6 +10,9 @@ const CompanyAddContainer = () => {
 
       companyToSend.name = event.target[0].value;
       companyToSend.address = event.target[1].value;
+      companyToSend.siret = event.target[2].value;
+      companyToSend.direct = event.target[3].value;
+
       companyToSend.idUser = localStorage.getItem("idUser") ?? null;
 
       const result = await apiRequest({

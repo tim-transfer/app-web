@@ -19,7 +19,7 @@ const UserListContainer = () => {
         `Êtes-vous sûr de vouloir supprimer l'utilisateur avec l'email ${userEmail}?`
       )
     ) {
-      handleDeleteUser(userId);
+      handleDeleteUser(userId, userEmail);
     }
   };
 

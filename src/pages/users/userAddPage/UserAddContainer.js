@@ -26,7 +26,7 @@ const UserAddContainer = () => {
   const loadData = async () => {
     try {
       const result = await apiRequest({
-        url: "company",
+        url: "companies",
         method: "GET",
       });
       if (result.status === 200) {

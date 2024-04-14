@@ -1,6 +1,6 @@
 import View from "./../../../component/View";
 
-const CompanyAddPage = ({handleSubmit}) => {
+const UserUpdatePage = ({ handleChange, handleSubmit, formData }) => {
   return (
     <View>
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
@@ -21,6 +21,8 @@ const CompanyAddPage = ({handleSubmit}) => {
               type="text"
               id="name"
               name="name"
+              value={formData.name}
+              onChange={handleChange}
               className="mt-1 p-2 border rounded-md w-full"
               required
             />
@@ -36,6 +38,8 @@ const CompanyAddPage = ({handleSubmit}) => {
               type="text"
               id="address"
               name="address"
+              value={formData.address}
+              onChange={handleChange}
               className="mt-1 p-2 border rounded-md w-full"
               required
             />
@@ -51,6 +55,8 @@ const CompanyAddPage = ({handleSubmit}) => {
               type="text"
               id="siret"
               name="siret"
+              value={formData.siret}
+              onChange={handleChange}
               className="mt-1 p-2 border rounded-md w-full"
               required
             />
@@ -66,6 +72,8 @@ const CompanyAddPage = ({handleSubmit}) => {
               type="text"
               id="direct"
               name="direct"
+              value={formData.direct}
+              onChange={handleChange}
               className="mt-1 p-2 border rounded-md w-full"
               required
             />
@@ -74,7 +82,7 @@ const CompanyAddPage = ({handleSubmit}) => {
             type="submit"
             className="bg-cyan-950 text-white p-2 rounded-md"
           >
-            Créer entreprise
+            Mettre à jour l'entreprise
           </button>
         </form>
       </div>
@@ -82,4 +90,4 @@ const CompanyAddPage = ({handleSubmit}) => {
   );
 };
 
-export default CompanyAddPage;
+export default UserUpdatePage;
