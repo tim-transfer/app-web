@@ -1,20 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import View from "./../../../component/View";
 import InputText from "./../../../component/InputText";
 
 const UserListPage = ({ listUser, handleConfirmDelete, handleUpdate }) => {
+  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  
+  const filteredListUser = listUser.filter(user =>
+    user.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.companyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (user.isAdmin ? "Admin" : "Utilisateur").toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentUserPage = filteredListUser.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(filteredListUser.length / itemsPerPage);
+
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const prevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+    setCurrentPage(1); // Reset current page when search term changes
+  };
+
   return (
     <View>
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
         <h1 className="text-xl font-semibold">Filtres</h1>
+        <InputText
+          placeholder={"Recherche"}
+          type={"text"}
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
       </div>
 
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
         <h1 className="text-xl font-semibold">Liste des utilisateurs</h1>
         <div className="flex justify-between items-center px-5">
-          <div className="mb-5">
-            <InputText placeholder={"Recherche"} type={"text"} />
-          </div>
           <a href="/user/add">
             <button>Créer</button>
           </a>
@@ -65,7 +99,7 @@ const UserListPage = ({ listUser, handleConfirmDelete, handleUpdate }) => {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {listUser.map((user) => (
+                    {currentUserPage.map((user) => (
                       <tr key={user.id}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           {user.lastName}
@@ -105,6 +139,11 @@ const UserListPage = ({ listUser, handleConfirmDelete, handleUpdate }) => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="flex justify-between mt-5">
+          <button onClick={prevPage} disabled={currentPage === 1}>Page précédente</button>
+          <span>Page {currentPage} sur {totalPages}</span>
+          <button onClick={nextPage} disabled={currentPage === totalPages}>Page suivante</button>
         </div>
       </div>
     </View>

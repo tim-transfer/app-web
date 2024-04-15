@@ -1,29 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import View from "./../../../component/View";
 import InputText from "./../../../component/InputText";
 
-const CompanyListPage = ({
-  listCompanies,
-  handleConfirmDelete,
-  handleUpdate,
-}) => {
+const CompanyListPage = ({ listCompanies, handleConfirmDelete, handleUpdate }) => {
+  const itemsPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  
+  const filteredListCompanies = listCompanies.filter(company =>
+    company.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    company.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    company.siret.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    company.direct.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentCompanies = filteredListCompanies.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(filteredListCompanies.length / itemsPerPage);
+
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const prevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+    setCurrentPage(1); // Reset current page when search term changes
+  };
+
   return (
     <View>
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
         <h1 className="text-xl font-semibold">Filtres</h1>
+        <InputText
+          placeholder={"Recherche"}
+          type={"text"}
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
       </div>
 
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
         <h1 className="text-xl font-semibold">Liste des utilisateurs</h1>
         <div className="flex justify-between items-center px-5">
-          <div className="mb-5">
-            <InputText placeholder={"Recherche"} type={"text"} />
-          </div>
           <a href="company/companyAddPage">
             <button>Créer</button>
           </a>
         </div>
-        <div className="flex flex-col">
+        <div className="overflow-auto">
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 pr-5">
             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
               <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -63,7 +92,7 @@ const CompanyListPage = ({
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {listCompanies.map((company) => (
+                    {currentCompanies.map((company) => (
                       <tr key={company.id}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           {company.name}
@@ -101,10 +130,14 @@ const CompanyListPage = ({
             </div>
           </div>
         </div>
+        <div className="flex justify-between mt-5">
+          <button onClick={prevPage} disabled={currentPage === 1}>Page précédente</button>
+          <span>Page {currentPage} sur {totalPages}</span>
+          <button onClick={nextPage} disabled={currentPage === totalPages}>Page suivante</button>
+        </div>
       </div>
     </View>
   );
 };
-
 
 export default CompanyListPage;

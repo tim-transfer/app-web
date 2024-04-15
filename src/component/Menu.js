@@ -17,11 +17,6 @@ const Menu = () => {
       route: '/companies',
       icon: HiOutlineOfficeBuilding // Icône pour les entreprises
     },
-    {
-      name: "Ajout entreprise",
-      route: "/company/companyAddPage",
-      icon: HiOutlineOfficeBuilding
-    },
   ];
 
   return (
