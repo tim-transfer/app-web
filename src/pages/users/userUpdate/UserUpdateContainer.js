@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import apiRequest from "../../../services/apiRequest";
 import UserUpdatePage from "./UserUpdatePage";
+import Toast from "../../../component/Toast";
 
 const UserUpdateContainer = () => {
   const { idParamInContainer } = useParams();
