@@ -37,7 +37,7 @@ const UserListPage = ({ listUser, handleConfirmDelete, handleUpdate }) => {
   return (
     <View>
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
-        <h1 className="text-xl font-semibold">Filtres</h1>
+        <h1 className="text-xl font-semibold">Filtre</h1>
         <InputText
           placeholder={"Recherche"}
           type={"text"}
@@ -48,8 +48,10 @@ const UserListPage = ({ listUser, handleConfirmDelete, handleUpdate }) => {
 
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
         <h1 className="text-xl font-semibold">Liste des utilisateurs</h1>
-        <div className="flex justify-between items-center px-5">
-          <a href="/user/add">
+        <div className="flex justify-between items-right px-5 mt-4">
+          <a href="company/companyAddPage" className="self-end ml-auto">
+            {" "}
+            {/* Ajoute ml-auto ici */}
             <button>Créer</button>
           </a>
         </div>

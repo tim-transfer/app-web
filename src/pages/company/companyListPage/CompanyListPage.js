@@ -2,21 +2,29 @@ import React, { useState } from "react";
 import View from "./../../../component/View";
 import InputText from "./../../../component/InputText";
 
-const CompanyListPage = ({ listCompanies, handleConfirmDelete, handleUpdate }) => {
+const CompanyListPage = ({
+  listCompanies,
+  handleConfirmDelete,
+  handleUpdate,
+}) => {
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
-  
-  const filteredListCompanies = listCompanies.filter(company =>
-    company.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    company.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    company.siret.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    company.direct.toLowerCase().includes(searchTerm.toLowerCase())
+
+  const filteredListCompanies = listCompanies.filter(
+    (company) =>
+      company.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      company.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      company.siret.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      company.direct.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentCompanies = filteredListCompanies.slice(indexOfFirstItem, indexOfLastItem);
+  const currentCompanies = filteredListCompanies.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   const totalPages = Math.ceil(filteredListCompanies.length / itemsPerPage);
 
@@ -36,7 +44,7 @@ const CompanyListPage = ({ listCompanies, handleConfirmDelete, handleUpdate }) =
   return (
     <View>
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
-        <h1 className="text-xl font-semibold">Filtres</h1>
+        <h1 className="text-xl font-semibold">Filtre</h1>
         <InputText
           placeholder={"Recherche"}
           type={"text"}
@@ -46,12 +54,15 @@ const CompanyListPage = ({ listCompanies, handleConfirmDelete, handleUpdate }) =
       </div>
 
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
-        <h1 className="text-xl font-semibold">Liste des utilisateurs</h1>
-        <div className="flex justify-between items-center px-5">
-          <a href="company/companyAddPage">
+        <h1 className="text-xl font-semibold">Liste des entreprises</h1>
+        <div className="flex justify-between items-right px-5 mt-4">
+          <a href="company/companyAddPage" className="self-end ml-auto">
+            {" "}
+            {/* Ajoute ml-auto ici */}
             <button>Créer</button>
           </a>
         </div>
+
         <div className="overflow-auto">
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 pr-5">
             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -75,7 +86,7 @@ const CompanyListPage = ({ listCompanies, handleConfirmDelete, handleUpdate }) =
                         scope="col"
                         className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                       >
-                        Numéro de sire
+                        Numéro de siret
                       </td>
                       <th
                         scope="col"
@@ -131,9 +142,15 @@ const CompanyListPage = ({ listCompanies, handleConfirmDelete, handleUpdate }) =
           </div>
         </div>
         <div className="flex justify-between mt-5">
-          <button onClick={prevPage} disabled={currentPage === 1}>Page précédente</button>
-          <span>Page {currentPage} sur {totalPages}</span>
-          <button onClick={nextPage} disabled={currentPage === totalPages}>Page suivante</button>
+          <button onClick={prevPage} disabled={currentPage === 1}>
+            Page précédente
+          </button>
+          <span>
+            Page {currentPage} sur {totalPages}
+          </span>
+          <button onClick={nextPage} disabled={currentPage === totalPages}>
+            Page suivante
+          </button>
         </div>
       </div>
     </View>
