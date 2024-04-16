@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import View from "./../../../component/View";
 import InputText from "./../../../component/InputText";
+import Button from "../../../component/Button";
 
 const CompanyListPage = ({
   listCompanies,
@@ -55,11 +56,15 @@ const CompanyListPage = ({
 
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
         <h1 className="text-xl font-semibold">Liste des entreprises</h1>
-        <div className="flex justify-between items-right px-5 mt-4">
+        <div className="flex justify-between items-right px-5 mt-4 mb-4">
           <a href="company/companyAddPage" className="self-end ml-auto">
             {" "}
             {/* Ajoute ml-auto ici */}
-            <button>Créer</button>
+            <Button
+            type="button"
+            label="Ajouter"
+            style="w-70 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            />
           </a>
         </div>
 
