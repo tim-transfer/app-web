@@ -2,9 +2,19 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import apiRequest from "../../../services/apiRequest";
 import UserUpdatePage from "./UserUpdatePage";
+import Toast from "../../../component/Toast";
 
 const UserUpdateContainer = () => {
   const { idParamInContainer } = useParams();
+  const [toast, setToast] = useState(null);
+
+  const showToast = (type, message) => {
+      setToast({ type, message });
+  };
+
+  const handleCloseToast = () => {
+      setToast(null);
+  };
 
   const [user, setUser] = useState({
     firstName: "",
@@ -69,19 +79,21 @@ const UserUpdateContainer = () => {
 
       if (result.status === 200) {
         window.location.href = "/users";
-        console.log("User updated successfully");
+        showToast("success","User updated successfully");
         // Optionally redirect or show success message
       } else {
-        console.error("Error updating user:", result.error);
+        showToast("error","Error updating user:", result.error);
         // Optionally show error message
       }
     } catch (error) {
-      console.error("Error updating user:", error);
+      showToast("error","Error updating user:", error);
       // Optionally show error message
     }
   };
 
   return (
+    <>
+      {toast && <Toast type={toast.type} message={toast.message} onClose={handleCloseToast} />}
     <UserUpdatePage
       listCompany={listCompany}
       handleChange={handleChange}
@@ -89,6 +101,7 @@ const UserUpdateContainer = () => {
       formData={user}
       listRoles={listRoles}
     />
+    </>
   );
 };
 
