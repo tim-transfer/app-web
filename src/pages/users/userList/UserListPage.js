@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import View from "./../../../component/View";
 import InputText from "./../../../component/InputText";
+import Button from "../../../component/Button";
 
 const UserListPage = ({ listUser, handleConfirmDelete, handleUpdate }) => {
   const itemsPerPage = 10;
@@ -50,7 +51,11 @@ const UserListPage = ({ listUser, handleConfirmDelete, handleUpdate }) => {
         <h1 className="text-xl font-semibold">Liste des utilisateurs</h1>
         <div className="flex justify-between items-center px-5">
           <a href="/user/add">
-            <button>Créer</button>
+            <Button
+            type="button"
+            label="Ajouter"
+            style="w-70 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            />
           </a>
         </div>
         <div className="flex flex-col">

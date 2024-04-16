@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
 import apiRequest from "../../../services/apiRequest";
 import UserListPage from "./UserListPage";
+import Toast from "../../../component/Toast";
 
 const UserListContainer = () => {
   const [listUser, setListUser] = useState([]);
+  const [toast, setToast] = useState(null);
 
+  const showToast = (type, message) => {
+      setToast({ type, message });
+  };
+
+  const handleCloseToast = () => {
+      setToast(null);
+  };
   useEffect(() => {
     loadData();
   }, []);
@@ -31,7 +40,7 @@ const UserListContainer = () => {
       });
 
       if (result.status === 200) {
-        alert("L'utilisateur : " + email + " a bien été suprimé !");
+        showToast("success","L'utilisateur : " + email + " a bien été suprimé !");
         await loadData();
       }
     } catch (error) {
@@ -39,7 +48,7 @@ const UserListContainer = () => {
         "Erreur lors de la suppression de l'utilisateur ayant pour id : " +
           email
       );
-      alert(
+      showToast("error",
         "Erreur lors de la suppression de l'utilisateur, veuillez contactez l'administrateur."
       );
     }
@@ -78,12 +87,15 @@ const UserListContainer = () => {
     }
   };
 
-  return (
-    <UserListPage
-      listUser={listUser}
-      handleConfirmDelete={handleConfirmDelete}
-      handleUpdate={handleUpdate}
-    />
+  return (<>
+    {toast && <Toast type={toast.type} message={toast.message} onClose={handleCloseToast} />}
+
+      <UserListPage
+        listUser={listUser}
+        handleConfirmDelete={handleConfirmDelete}
+        handleUpdate={handleUpdate}
+      />
+    </>
   );
 };
 

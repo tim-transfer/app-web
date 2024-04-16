@@ -1,7 +1,19 @@
 import CompanyAddPage from "./CompanyAddPage";
 import apiRequest from "../../../services/apiRequest";
+import Toast from "../../../component/Toast";
+import { useState } from "react";
 
 const CompanyAddContainer = () => {
+  const [toast, setToast] = useState(null);
+
+  const showToast = (type, message) => {
+      setToast({ type, message });
+  };
+
+  const handleCloseToast = () => {
+      setToast(null);
+  };
+
   const onSubmit = async (event) => {
     try {
       event.preventDefault();
@@ -21,15 +33,21 @@ const CompanyAddContainer = () => {
         data: companyToSend,
       });
 
-      if (result.status == 201) {
+      if (result.status == 200) {
+        showToast("success", "l'entreprise a bien été créer !");
         window.location.reload();
       }
     } catch (error) {
-      alert("Une entreprise avec le même nom existe déjà");
+      showToast("error", error.message);
     }
   };
 
-  return <CompanyAddPage handleSubmit={onSubmit}></CompanyAddPage>;
+  return (
+    <>
+    <CompanyAddPage handleSubmit={onSubmit}></CompanyAddPage>
+    {toast && <Toast type={toast.type} message={toast.message} onClose={handleCloseToast} />}
+    </>
+);
 };
 
 export default CompanyAddContainer;
