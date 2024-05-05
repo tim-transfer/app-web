@@ -121,8 +121,8 @@ const UserAddPage = ({
             >
               <option value="">Sélectionnez un rôle</option>
               {listRoles.map((role) => (
-                <option key={role.value} value={role.value}>
-                  {role.text}
+                <option key={role.id} value={role.id}>
+                  {role.posterLibelle}
                 </option>
               ))}
             </select>

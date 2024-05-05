@@ -9,11 +9,11 @@ const UserUpdateContainer = () => {
   const [toast, setToast] = useState(null);
 
   const showToast = (type, message) => {
-      setToast({ type, message });
+    setToast({ type, message });
   };
 
   const handleCloseToast = () => {
-      setToast(null);
+    setToast(null);
   };
 
   const [user, setUser] = useState({
@@ -24,10 +24,7 @@ const UserUpdateContainer = () => {
     isAdmin: false,
   });
 
-  const [listRoles, setListRoles] = useState([
-    { value: true, text: "Administrateur" },
-    { value: false, text: "Utilisateur" },
-  ]);
+  const [listRoles, setListRoles] = useState([]);
 
   const [listCompany, setListCompany] = useState([]);
 
@@ -59,6 +56,21 @@ const UserUpdateContainer = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
+
+    try {
+      const result = await apiRequest({
+        url: "roles",
+        method: "GET",
+      });
+      if (result.status === 200) {
+        setListRoles(result.data.result);
+      }
+    } catch (error) {
+      console.error(
+        "Une erreur s'est produite lors du chargement des rôles.",
+        error
+      );
+    }
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,28 +91,34 @@ const UserUpdateContainer = () => {
 
       if (result.status === 200) {
         window.location.href = "/users";
-        showToast("success","User updated successfully");
+        showToast("success", "User updated successfully");
         // Optionally redirect or show success message
       } else {
-        showToast("error","Error updating user:", result.error);
+        showToast("error", "Error updating user:", result.error);
         // Optionally show error message
       }
     } catch (error) {
-      showToast("error","Error updating user:", error);
+      showToast("error", "Error updating user:", error);
       // Optionally show error message
     }
   };
 
   return (
     <>
-      {toast && <Toast type={toast.type} message={toast.message} onClose={handleCloseToast} />}
-    <UserUpdatePage
-      listCompany={listCompany}
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
-      formData={user}
-      listRoles={listRoles}
-    />
+      {toast && (
+        <Toast
+          type={toast.type}
+          message={toast.message}
+          onClose={handleCloseToast}
+        />
+      )}
+      <UserUpdatePage
+        listCompany={listCompany}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        formData={user}
+        listRoles={listRoles}
+      />
     </>
   );
 };
