@@ -49,7 +49,7 @@ const UserUpdateContainer = () => {
 
       // Fetch company list
       const companyResult = await apiRequest({
-        url: "company",
+        url: "companies",
         method: "GET",
       });
 
