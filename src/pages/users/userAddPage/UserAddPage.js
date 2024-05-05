@@ -1,4 +1,5 @@
-import View from "./../../../component/View";
+import React from 'react';
+import { Container, Typography, TextField, Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 
 const UserAddPage = ({
   listCompany,
@@ -8,134 +9,113 @@ const UserAddPage = ({
   listRoles,
 }) => {
   return (
-    <View>
+    <Container maxWidth="sm">
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
-        <h1 className="text-xl font-semibold">Création d'un utilisateur</h1>
+        <Typography variant="h4" gutterBottom>Création d'un utilisateur</Typography>
       </div>
 
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
         <form className="mt-4" onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label
-              htmlFor="firstName"
-              className="block text-sm font-medium text-gray-600"
-            >
-              Prénom
-            </label>
-            <input
-              type="text"
+            <InputLabel htmlFor="firstName">Prénom</InputLabel>
+            <TextField
               id="firstName"
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              className="mt-1 p-2 border rounded-md w-full"
+              variant="outlined"
+              fullWidth
               required
             />
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="lastName"
-              className="block text-sm font-medium text-gray-600"
-            >
-              Nom
-            </label>
-            <input
-              type="text"
+            <InputLabel htmlFor="lastName">Nom</InputLabel>
+            <TextField
               id="lastName"
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              className="mt-1 p-2 border rounded-md w-full"
+              variant="outlined"
+              fullWidth
               required
             />
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-600"
-            >
-              Adresse mail
-            </label>
-            <input
-              type="text"
+            <InputLabel htmlFor="email">Adresse mail</InputLabel>
+            <TextField
               id="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="mt-1 p-2 border rounded-md w-full"
+              variant="outlined"
+              fullWidth
               required
             />
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="tempPassword"
-              className="block text-sm font-medium text-gray-600"
-            >
-              Mot de passe temporaire
-            </label>
-            <input
+            <InputLabel htmlFor="tempPassword">Mot de passe temporaire</InputLabel>
+            <TextField
               type="password"
               id="tempPassword"
               name="tempPassword"
               value={formData.tempPassword}
               onChange={handleChange}
-              className="mt-1 p-2 border rounded-md w-full"
+              variant="outlined"
+              fullWidth
               required
             />
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="companyId"
-              className="block text-sm font-medium text-gray-600"
-            >
-              Entreprise
-            </label>
-            <select
+            <InputLabel id="companyId-label">Entreprise</InputLabel>
+            <Select
+              labelId="companyId-label"
               id="companyId"
               name="companyId"
               value={formData.companyId}
               onChange={handleChange}
-              className="mt-1 p-2 border rounded-md w-full"
+              variant="outlined"
+              fullWidth
               required
             >
-              <option value="">Sélectionnez une entreprise</option>
+              <MenuItem value="">Sélectionnez une entreprise</MenuItem>
               {listCompany.map((company) => (
-                <option key={company.id} value={company.id}>
+                <MenuItem key={company.id} value={company.id}>
                   {company.name}
-                </option>
+                </MenuItem>
               ))}
-            </select>
+            </Select>
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="isAdmin"
-              className="block text-sm font-medium text-gray-600"
-            >Rôle</label>
-            <select
+            <InputLabel id="isAdmin-label">Rôle</InputLabel>
+            <Select
+              labelId="isAdmin-label"
               id="isAdmin"
               name="isAdmin"
               value={formData.isAdmin}
               onChange={handleChange}
-              className="mt-1 p-2 border rounded-md w-full"
+              variant="outlined"
+              fullWidth
               required
             >
-              <option value="">Sélectionnez un rôle</option>
+              <MenuItem value="">Sélectionnez un rôle</MenuItem>
               {listRoles.map((role) => (
-                <option key={role.value} value={role.value}>
+                <MenuItem key={role.value} value={role.value}>
                   {role.text}
-                </option>
+                </MenuItem>
               ))}
-            </select>
+            </Select>
           </div>
-          <button
+          <Button
             type="submit"
-            className="bg-cyan-950 text-white p-2 rounded-md"
+            variant="contained"
+            color="primary"
+            fullWidth
           >
             Créer utilisateur
-          </button>
+          </Button>
         </form>
       </div>
-    </View>
+    </Container>
   );
 };
 

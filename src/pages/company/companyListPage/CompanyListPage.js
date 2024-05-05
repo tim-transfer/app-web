@@ -1,5 +1,16 @@
 import React, { useState } from "react";
-import { TextField, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
+import {
+  TextField,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Typography,
+} from '@mui/material';
 
 const CompanyListPage = ({
   listCompanies,
@@ -42,8 +53,8 @@ const CompanyListPage = ({
 
   return (
     <div>
-      <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
-        <h1 className="text-xl font-semibold">Filtre</h1>
+      <div style={{ padding: "1.5rem", backgroundColor: "white", border: "1px solid #e5e7eb", borderRadius: "0.375rem", boxShadow: "0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)", marginTop: "2.5rem" }}>
+        <h1 style={{ fontSize: "1.5rem", fontWeight: "bold" }}>Filtre</h1>
         <TextField
           placeholder={"Recherche"}
           type={"text"}
@@ -52,10 +63,10 @@ const CompanyListPage = ({
         />
       </div>
 
-      <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
-        <div className="flex justify-between items-center px-5 mt-4 mb-5" >      
-          <h1 className="text-xl font-semibold">Liste des entreprises</h1>
-          <a href="company/companyAddPage" className="flex items-center">
+      <div style={{ padding: "1.5rem", backgroundColor: "white", border: "1px solid #e5e7eb", borderRadius: "0.375rem", boxShadow: "0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)", marginTop: "2.5rem" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.3125rem 0.625rem", marginTop: "0.625rem", marginBottom: "0.9375rem" }}>
+          <h1 style={{ fontSize: "1.5rem", fontWeight: "bold" }}>Liste des entreprises</h1>
+          <a href="company/companyAddPage" style={{ textDecoration: "none" }}>
             <Button
               variant="contained"
               color="primary"
@@ -89,6 +100,7 @@ const CompanyListPage = ({
                       variant="contained"
                       color="primary"
                       onClick={() => handleUpdate(company.id)}
+                      style={{ marginRight: "0.5rem" }}
                     >
                       Modifier
                     </Button>
@@ -106,7 +118,7 @@ const CompanyListPage = ({
           </Table>
         </TableContainer>
         
-        <div className="flex justify-between mt-5">
+        <div style={{ display: "flex", justifyContent: "space-between", padding: "0.5rem" }}>
           <Button
             variant="contained"
             color="primary"
