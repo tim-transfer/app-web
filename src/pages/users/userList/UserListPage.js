@@ -50,8 +50,11 @@ const UserListPage = ({ listUser, handleConfirmDelete, handleUpdate }) => {
     <div style={{ marginLeft: "0.001em" }}>
       <Container>
         <View>
+        <Typography variant="h4">Liste des utilisateurs</Typography>
+        <br></br>
+        <br></br>
           <div>
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h8" gutterBottom>
               Filtre
             </Typography>
             <InputText
@@ -70,12 +73,12 @@ const UserListPage = ({ listUser, handleConfirmDelete, handleUpdate }) => {
                 padding: "0.5rem",
               }}
             >
-              <Typography variant="h4">Liste des utilisateurs</Typography>
+             
               <Button
                 href="user/add"
                 variant="contained"
                 color="primary"
-                sx={{ textTransform: "none" }}
+                style={{ textTransform: "none", marginRight: "25em" }}
               >
                 Ajouter
               </Button>

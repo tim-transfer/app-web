@@ -10,7 +10,7 @@ import {
   TableRow,
   Paper,
   Typography,
-} from '@mui/material';
+} from "@mui/material";
 
 const CompanyListPage = ({
   listCompanies,
@@ -53,8 +53,18 @@ const CompanyListPage = ({
 
   return (
     <div>
-      <div style={{ padding: "1.5rem", backgroundColor: "white", border: "1px solid #e5e7eb", borderRadius: "0.375rem", boxShadow: "0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)", marginTop: "2.5rem" }}>
-        <h1 style={{ fontSize: "1.5rem", fontWeight: "bold" }}>Filtre</h1>
+      <div
+        style={{
+          padding: "1.5rem",
+          backgroundColor: "white",
+          border: "1px solid #e5e7eb",
+          borderRadius: "0.375rem",
+          boxShadow: "0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)",
+          marginTop: "2.5rem",
+        }}
+      >
+        <Typography variant="h4">Liste des entreprises</Typography>
+        <h8 style={{ fontSize: "1.5rem", fontWeight: "bold" }}>Filtre</h8>
         <TextField
           placeholder={"Recherche"}
           type={"text"}
@@ -63,9 +73,26 @@ const CompanyListPage = ({
         />
       </div>
 
-      <div style={{ padding: "1.5rem", backgroundColor: "white", border: "1px solid #e5e7eb", borderRadius: "0.375rem", boxShadow: "0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)", marginTop: "2.5rem" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.3125rem 0.625rem", marginTop: "0.625rem", marginBottom: "0.9375rem" }}>
-          <h1 style={{ fontSize: "1.5rem", fontWeight: "bold" }}>Liste des entreprises</h1>
+      <div
+        style={{
+          padding: "1.5rem",
+          backgroundColor: "white",
+          border: "1px solid #e5e7eb",
+          borderRadius: "0.375rem",
+          boxShadow: "0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)",
+          marginTop: "2.5rem",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "0.3125rem 0.625rem",
+            marginTop: "0.625rem",
+            marginBottom: "0.9375rem",
+          }}
+        >
           <a href="company/companyAddPage" style={{ textDecoration: "none" }}>
             <Button
               variant="contained"
@@ -107,7 +134,9 @@ const CompanyListPage = ({
                     <Button
                       variant="contained"
                       color="secondary"
-                      onClick={() => handleConfirmDelete(company.id, company.name)}
+                      onClick={() =>
+                        handleConfirmDelete(company.id, company.name)
+                      }
                     >
                       Supprimer
                     </Button>
@@ -117,8 +146,14 @@ const CompanyListPage = ({
             </TableBody>
           </Table>
         </TableContainer>
-        
-        <div style={{ display: "flex", justifyContent: "space-between", padding: "0.5rem" }}>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "0.5rem",
+          }}
+        >
           <Button
             variant="contained"
             color="primary"
