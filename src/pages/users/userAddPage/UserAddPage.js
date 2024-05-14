@@ -99,8 +99,8 @@ const UserAddPage = ({
             >
               <MenuItem value="">Sélectionnez un rôle</MenuItem>
               {listRoles.map((role) => (
-                <MenuItem key={role.value} value={role.value}>
-                  {role.text}
+                <MenuItem key={role.id} value={role.id}>
+                  {role.libelle}
                 </MenuItem>
               ))}
             </Select>

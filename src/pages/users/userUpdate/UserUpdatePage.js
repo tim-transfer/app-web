@@ -1,17 +1,28 @@
-import React from 'react';
-import { Container, Typography, TextField, Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import React from "react";
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
 
 const UserUpdatePage = ({
   listCompany,
   handleChange,
   handleSubmit,
   formData,
-  listRoles
+  listRoles,
 }) => {
   return (
     <Container maxWidth="sm">
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
-        <Typography variant="h4" gutterBottom>Modification d'un utilisateur</Typography>
+        <Typography variant="h4" gutterBottom>
+          Modification d'un utilisateur
+        </Typography>
       </div>
 
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-50 dark:border-gray-50 flex flex-col mt-10">
@@ -86,18 +97,13 @@ const UserUpdatePage = ({
             >
               <MenuItem value="">Sélectionnez un rôle</MenuItem>
               {listRoles.map((role) => (
-                <MenuItem key={role.value} value={role.value}>
-                  {role.text}
+                <MenuItem key={role.id} value={role.id}>
+                  {role.libelle}
                 </MenuItem>
               ))}
             </Select>
           </div>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-          >
+          <Button type="submit" variant="contained" color="primary" fullWidth>
             Mettre à jour l'utilisateur
           </Button>
         </form>
