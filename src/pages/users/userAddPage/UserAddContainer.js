@@ -11,13 +11,10 @@ const UserAddContainer = () => {
     tempPassword: "",
     companyId: "",
     email: "",
-    isAdmin: false,
+    idRole: 2, //Par défault, l'identifiant du rôle sera de 2 qui correspond au rôle utilisateur.
   });
 
-  const [listRoles, setListRoles] = useState([
-    { value: true, text: "Administrateur" },
-    { value: false, text: "Utilisateur" },
-  ]);
+  const [listRoles, setListRoles] = useState([]);
 
   useEffect(() => {
     loadData();
@@ -35,6 +32,21 @@ const UserAddContainer = () => {
     } catch (error) {
       console.error(
         "Une erreur s'est produite lors du chargement des entreprises:",
+        error
+      );
+    }
+
+    try {
+      const result = await apiRequest({
+        url: "roles",
+        method: "GET",
+      });
+      if (result.status === 200) {
+        setListRoles(result.data.result);
+      }
+    } catch (error) {
+      console.error(
+        "Une erreur s'est produite lors du chargement des rôles.",
         error
       );
     }
@@ -57,7 +69,7 @@ const UserAddContainer = () => {
         password: formData.tempPassword,
         companyId: formData.companyId,
         email: formData.email,
-        isAdmin: formData.isAdmin,
+        idRole: formData.idRole,
       };
 
       const result = await apiRequest({
