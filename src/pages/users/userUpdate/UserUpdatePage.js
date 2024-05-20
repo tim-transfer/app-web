@@ -16,6 +16,8 @@ const UserUpdatePage = ({
   handleSubmit,
   formData,
   listRoles,
+  emailError,
+  handleEmailChange,
 }) => {
   return (
     <Container maxWidth="sm">
@@ -57,7 +59,15 @@ const UserUpdatePage = ({
               id="email"
               name="email"
               value={formData.email}
-              onChange={handleChange}
+              onChange={handleEmailChange}
+              helperText={
+                emailError
+                  ? "S'il vous plaît, rentrez une adresse mail valide."
+                  : ""
+              }
+              inputProps={{
+                type: "email",
+              }}
               variant="outlined"
               fullWidth
               required

@@ -8,13 +8,13 @@ const UserAddContainer = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    tempPassword: "",
     companyId: "",
     email: "",
     idRole: 2, //Par défault, l'identifiant du rôle sera de 2 qui correspond au rôle utilisateur.
   });
 
   const [listRoles, setListRoles] = useState([]);
+  const [emailError, setEmailError] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -95,6 +95,15 @@ const UserAddContainer = () => {
     }
   };
 
+  const handleEmailChange = (e) => {
+    handleChange(e);
+    if (e.target.validity.valid) {
+      setEmailError(false);
+    } else {
+      setEmailError(true);
+    }
+  };
+
   return (
     <UserAddPage
       listCompany={listCompany}
@@ -102,6 +111,8 @@ const UserAddContainer = () => {
       handleSubmit={handleSubmit}
       formData={formData}
       listRoles={listRoles}
+      emailError={emailError}
+      handleEmailChange={handleEmailChange}
     />
   );
 };

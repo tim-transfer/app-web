@@ -3,10 +3,12 @@ import { useParams } from "react-router-dom";
 import apiRequest from "../../../services/apiRequest";
 import UserUpdatePage from "./UserUpdatePage";
 import Toast from "../../../component/Toast";
+import Alert from '@mui/material/Alert';
 
 const UserUpdateContainer = () => {
   const { idParamInContainer } = useParams();
   const [toast, setToast] = useState(null);
+  const [emailError, setEmailError] = useState(false);
 
   const showToast = (type, message) => {
     setToast({ type, message });
@@ -82,6 +84,15 @@ const UserUpdateContainer = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (event.target.checkValidity()) {
+      return (
+        <Alert severity="error" color="warning">
+          Erreur, vous avez pas entrée correctement les données
+        </Alert>
+      );
+    }
+
     try {
       const result = await apiRequest({
         url: `user/${idParamInContainer}`,
@@ -103,6 +114,15 @@ const UserUpdateContainer = () => {
     }
   };
 
+  const handleEmailChange = (e) => {
+    handleChange(e);
+    if (e.target.validity.valid) {
+      setEmailError(false);
+    } else {
+      setEmailError(true);
+    }
+  };
+
   return (
     <>
       {toast && (
@@ -118,6 +138,8 @@ const UserUpdateContainer = () => {
         handleSubmit={handleSubmit}
         formData={user}
         listRoles={listRoles}
+        emailError={emailError}
+        handleEmailChange={handleEmailChange}
       />
     </>
   );

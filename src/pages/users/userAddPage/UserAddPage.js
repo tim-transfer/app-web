@@ -7,6 +7,8 @@ const UserAddPage = ({
   handleSubmit,
   formData,
   listRoles,
+  emailError,
+  handleEmailChange
 }) => {
   return (
     <Container maxWidth="sm">
@@ -46,21 +48,12 @@ const UserAddPage = ({
               id="email"
               name="email"
               value={formData.email}
-              onChange={handleChange}
+              onChange={handleEmailChange}
               variant="outlined"
-              fullWidth
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <InputLabel htmlFor="tempPassword">Mot de passe temporaire</InputLabel>
-            <TextField
-              type="password"
-              id="tempPassword"
-              name="tempPassword"
-              value={formData.tempPassword}
-              onChange={handleChange}
-              variant="outlined"
+              helperText={emailError ? "S'il vous plaît, rentrez une adresse mail valide." : ""}
+              inputProps={{
+                type: "email",
+              }}
               fullWidth
               required
             />
