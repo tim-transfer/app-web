@@ -1,14 +1,6 @@
 // my-react-app/src/App.js
-import Login from './auth/Login';
 import * as React from "react";
-import * as ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
 import "./index.css";
-import routes from "./routes/index"
-import Menu from './component/Menu';
 import axios from 'axios';
 
 const App = () => {
