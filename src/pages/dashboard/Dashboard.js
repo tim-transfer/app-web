@@ -8,16 +8,23 @@ import { Grid } from "@mui/material";
 import { Box } from "@mui/material";
 
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     try {
       const userJson = localStorage.getItem("user");
       if (userJson) {
         const parsedUser = JSON.parse(userJson);
         setUser(parsedUser);
+
+        if (parsedUser.isFirstConnection) {
+          navigate("/user/changFirstPassword/" + user, {
+            state: { user: user },
+          });
+        }
       }
     } catch (error) {
       console.error("Erreur lors du parsing du JSON:", error);
@@ -27,11 +34,11 @@ const Dashboard = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     console.log("Utilisateur déconnecté");
-    window.location.href = "/login";
+    navigate("/login");
   };
 
   return (
-    <Box sx={{mt: "5em"}}>
+    <Box sx={{ mt: "5em" }}>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
