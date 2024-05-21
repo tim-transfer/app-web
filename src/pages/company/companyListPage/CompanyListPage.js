@@ -17,18 +17,19 @@ const CompanyListPage = ({
   handleConfirmDelete,
   handleUpdate,
 }) => {
+  // Constants for pagination
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredListCompanies = listCompanies.filter(
-    (company) =>
-      company.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      company.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      company.siret.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      company.direct.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filtering the list of companies based on the search term
+  const filteredListCompanies = listCompanies.filter((company) =>
+    ["name", "address", "siret", "direct"].some((key) =>
+      company[key].toLowerCase().includes(searchTerm.toLowerCase())
+    )
   );
 
+  // Calculate the indices for the current page items
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentCompanies = filteredListCompanies.slice(
@@ -36,144 +37,154 @@ const CompanyListPage = ({
     indexOfLastItem
   );
 
+  // Calculate the total number of pages
   const totalPages = Math.ceil(filteredListCompanies.length / itemsPerPage);
 
+  // Handle pagination
   const nextPage = () => {
-    setCurrentPage(currentPage + 1);
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   const prevPage = () => {
-    setCurrentPage(currentPage - 1);
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
+  // Handle search term change
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
-    setCurrentPage(1); // Reset current page when search term changes
+    setCurrentPage(1); // Reset to first page on search term change
   };
 
   return (
     <div>
+      {/* Search Bar */}
       <div
         style={{
-          padding: "1.5rem",
+          padding: "1rem",
           backgroundColor: "white",
           border: "1px solid #e5e7eb",
           borderRadius: "0.375rem",
           boxShadow: "0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)",
-          marginTop: "2.5rem",
+          marginTop: "1.5rem",
+          width: "100em"
         }}
       >
-        <Typography variant="h4">Liste des entreprises</Typography>
-        <h8 style={{ fontSize: "1.5rem", fontWeight: "bold" }}>Filtre</h8>
+        <Typography variant="h5" gutterBottom>
+          Liste des entreprises
+        </Typography>
         <TextField
-          placeholder={"Recherche"}
-          type={"text"}
+          placeholder="Recherche"
+          type="text"
           value={searchTerm}
           onChange={handleSearchChange}
+          size="small"
+          fullWidth
+          variant="outlined"
+          style={{ marginBottom: "1rem" }}
         />
       </div>
 
+      {/* Add Company Button */}
       <div
         style={{
-          padding: "1.5rem",
-          backgroundColor: "white",
-          border: "1px solid #e5e7eb",
-          borderRadius: "0.375rem",
-          boxShadow: "0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)",
-          marginTop: "2.5rem",
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: "1rem",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "0.3125rem 0.625rem",
-            marginTop: "0.625rem",
-            marginBottom: "0.9375rem",
-          }}
+        <Button
+          href="company/companyAddPage"
+          variant="contained"
+          color="primary"
+          size="small"
+          style={{ textTransform: "none" }}
         >
-          <a href="company/companyAddPage" style={{ textDecoration: "none" }}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => console.log("Add company")} // Replace console.log with your add company logic
-            >
-              Ajouter
-            </Button>
-          </a>
-        </div>
+          Ajouter
+        </Button>
+      </div>
 
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Nom</TableCell>
-                <TableCell>Adresse</TableCell>
-                <TableCell>Numéro de siret</TableCell>
-                <TableCell>Dirigeant</TableCell>
-                <TableCell>Actions</TableCell>
+      {/* Companies Table */}
+      <TableContainer component={Paper}>
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>Nom</TableCell>
+              <TableCell>Adresse</TableCell>
+              <TableCell>Numéro de siret</TableCell>
+              <TableCell>Dirigeant</TableCell>
+              <TableCell>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {currentCompanies.map((company) => (
+              <TableRow key={company.id}>
+                <TableCell>{company.name}</TableCell>
+                <TableCell>{company.address}</TableCell>
+                <TableCell>{company.siret}</TableCell>
+                <TableCell>{company.direct}</TableCell>
+                <TableCell>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => handleUpdate(company.id)}
+                    style={{ textTransform: "none" }}
+                    size="small"
+                  >
+                    Modifier
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() =>
+                      handleConfirmDelete(company.id, company.name)
+                    }
+                    size="small"
+                  >
+                    Supprimer
+                  </Button>
+                </TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {currentCompanies.map((company) => (
-                <TableRow key={company.id}>
-                  <TableCell>{company.name}</TableCell>
-                  <TableCell>{company.address}</TableCell>
-                  <TableCell>{company.siret}</TableCell>
-                  <TableCell>{company.direct}</TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => handleUpdate(company.id)}
-                      style={{ marginRight: "0.5rem" }}
-                    >
-                      Modifier
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={() =>
-                        handleConfirmDelete(company.id, company.name)
-                      }
-                    >
-                      Supprimer
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            padding: "0.5rem",
-          }}
+      {/* Pagination Controls */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: "0.5rem",
+          marginTop: "1rem",
+        }}
+      >
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={prevPage}
+          disabled={currentPage === 1}
+          size="small"
+          style={{ textTransform: "none" }}
         >
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={prevPage}
-            disabled={currentPage === 1}
-          >
-            Page précédente
-          </Button>
-          <Typography variant="body1">
-            Page {currentPage} sur {totalPages}
-          </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={nextPage}
-            disabled={currentPage === totalPages}
-          >
-            Page suivante
-          </Button>
-        </div>
+          Page précédente
+        </Button>
+        <Typography variant="body2">
+          Page {currentPage} sur {totalPages}
+        </Typography>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={nextPage}
+          disabled={currentPage === totalPages}
+          size="small"
+          style={{ textTransform: "none" }}
+        >
+          Page suivante
+        </Button>
       </div>
     </div>
   );
