@@ -21,9 +21,9 @@ const CompanyAddContainer = () => {
       let companyToSend = new Object();
 
       companyToSend.name = event.target[0].value;
-      companyToSend.address = event.target[1].value;
-      companyToSend.siret = event.target[2].value;
-      companyToSend.direct = event.target[3].value;
+      companyToSend.address = event.target[2].value;
+      companyToSend.siret = event.target[4].value;
+      companyToSend.direct = event.target[6].value;
 
       companyToSend.idUser = localStorage.getItem("idUser") ?? null;
 
