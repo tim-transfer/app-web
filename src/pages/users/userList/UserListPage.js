@@ -8,6 +8,8 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  TableContainer,
+  TextField
 } from "@mui/material";
 import View from "./../../../component/View";
 import InputText from "./../../../component/InputText";
@@ -31,7 +33,7 @@ const UserListPage = ({ listUser, handleConfirmDelete, handleUpdate }) => {
     indexOfLastItem
   );
 
-  const totalPages = Math.ceil(filteredListUser.length / itemsPerPage) + 1;
+  const totalPages = Math.ceil(filteredListUser.length / itemsPerPage);
 
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
@@ -47,117 +49,138 @@ const UserListPage = ({ listUser, handleConfirmDelete, handleUpdate }) => {
   };
 
   return (
-    <div style={{ marginLeft: "0.001em" }}>
-      <Container>
+    <div
+      style={{
+        padding: "1rem",
+        backgroundColor: "white",
+        border: "1px solid #e5e7eb",
+        borderRadius: "0.375rem",
+        boxShadow: "0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)",
+        marginTop: "1.5rem",
+      }}
+    >
+      <TableContainer>
         <View>
-        <Typography variant="h4">Liste des utilisateurs</Typography>
-        <br></br>
-        <br></br>
-          <div>
-            <Typography variant="h8" gutterBottom>
+          <Typography variant="h5" gutterBottom>
+            Liste des utilisateurs
+          </Typography>
+          <div style={{ marginBottom: "1rem" }}>
+            <Typography variant="subtitle1" gutterBottom>
               Filtre
             </Typography>
-            <InputText
-              placeholder={"Recherche"}
-              type={"text"}
+            <TextField
+              placeholder="Recherche"
+              type="text"
               value={searchTerm}
               onChange={handleSearchChange}
+              size="small"
+              fullWidth
+              variant="outlined"
+              style={{ marginBottom: "1rem" }}
             />
           </div>
-
-          <div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                padding: "0.5rem",
-              }}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "1rem",
+            }}
+          >
+            <Button
+              href="user/add"
+              variant="contained"
+              color="primary"
+              size="small"
+              style={{ textTransform: "none" }}
             >
-             
-              <Button
-                href="user/add"
-                variant="contained"
-                color="primary"
-                style={{ textTransform: "none", marginRight: "25em" }}
-              >
-                Ajouter
-              </Button>
-            </div>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Nom</TableCell>
-                  <TableCell>Prénom</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>Entreprise</TableCell>
-                  <TableCell>Rôle</TableCell>
-                  <TableCell>Actions</TableCell>
+              Ajouter
+            </Button>
+          </div>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell>Nom</TableCell>
+                <TableCell>Prénom</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Entreprise</TableCell>
+                <TableCell>Rôle</TableCell>
+                <TableCell>Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {currentUserPage.map((user) => (
+                <TableRow key={user.id}>
+                  <TableCell>
+                    {user.lastName}
+                  </TableCell>
+                  <TableCell>
+                    {user.firstName}
+                  </TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>
+                    {user.companyName}
+                  </TableCell>
+                  <TableCell>
+                    {user.isAdmin ? "Admin" : "Utilisateur"}
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => handleUpdate(user.id)}
+                      size="small"
+                      style={{ marginRight: "0.5rem", textTransform: "none" }}
+                    >
+                      Modifier
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => handleConfirmDelete(user.id, user.email)}
+                      size="small"
+                      style={{ textTransform: "none" }}
+                    >
+                      Supprimer
+                    </Button>
+                  </TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {currentUserPage.map((user) => (
-                  <TableRow key={user.id}>
-                    <TableCell>{user.lastName}</TableCell>
-                    <TableCell>{user.firstName}</TableCell>
-                    <TableCell>{user.email}</TableCell>
-                    <TableCell>{user.companyName}</TableCell>
-                    <TableCell>
-                      {user.isAdmin ? "Admin" : "Utilisateur"}
-                    </TableCell>
-                    <TableCell>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => handleUpdate(user.id)}
-                        sx={{ marginRight: "0.5rem", textTransform: "none" }}
-                      >
-                        Modifier
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={() => handleConfirmDelete(user.id, user.email)}
-                        style={{ textTransform: "none" }}
-                      >
-                        Supprimer
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                padding: "0.5rem",
-              }}
+              ))}
+            </TableBody>
+          </Table>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              padding: "0.5rem",
+              marginTop: "1rem",
+            }}
+          >
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={prevPage}
+              disabled={currentPage === 1}
+              size="small"
+              style={{ textTransform: "none" }}
             >
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={prevPage}
-                disabled={currentPage === 1}
-                style={{ textTransform: "none" }}
-              >
-                Page précédente
-              </Button>
-              <Typography color="textSecondary">
-                Page {currentPage} sur {totalPages}
-              </Typography>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={nextPage}
-                disabled={currentPage === totalPages}
-                style={{ textTransform: "none" }}
-              >
-                Page suivante
-              </Button>
-            </div>
+              Page précédente
+            </Button>
+            <Typography variant="body2">
+              Page {currentPage} sur {totalPages}
+            </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={nextPage}
+              disabled={currentPage === totalPages}
+              size="small"
+              style={{ textTransform: "none" }}
+            >
+              Page suivante
+            </Button>
           </div>
         </View>
-      </Container>
+      </TableContainer>
     </div>
   );
 };
