@@ -1,29 +1,82 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import InputText from "../component/InputText";
-import Button from "../component/Button";
 import apiRequest from "../services/apiRequest";
 import { useNavigate } from "react-router-dom";
+import * as React from "react";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Slide from "@mui/material/Slide";
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [open, setOpen] = useState(false);
+  const passwordRef = useRef(null);
+
+  const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
+
+  useEffect(() => {
+    if (!open && passwordRef.current) {
+      passwordRef.current.focus();
+    }
+  }, [open]);
 
   const login = async () => {
-    const response = await apiRequest({
-      url: "/auth/login",
-      method: "POST",
-      data: { email, password },
-    });
-    if (response.data.result == true) {
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("idUser", response.data.idUser);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
-      navigate("/dashboard");
+    console.log("Login attempt");
+    try {
+      const response = await apiRequest({
+        url: "/auth/login",
+        method: "POST",
+        data: { email, password },
+      });
+      if (response.data.result) {
+        console.log("Login successful");
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("idUser", response.data.idUser);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        navigate("/dashboard");
+      } else {
+        console.log("Login failed: incorrect credentials");
+        setOpen(true);
+      }
+    } catch (error) {
+      console.error("Login error", error);
+      setOpen(true);
     }
   };
+
+  const handleClose = () => {
+    console.log("Dialog closed");
+
+    window.location.reload();
+  };
+
   return (
-    <>
+    <React.Fragment>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{"Alerte"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            Votre identifiant ou votre mot de passe est faux.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Quitter</Button>
+        </DialogActions>
+      </Dialog>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -57,6 +110,7 @@ const Login = () => {
                     setPassword(value.target.value);
                   }}
                   label="Mot de passe"
+                  ref={passwordRef}
                 />
                 <div className="text-sm">
                   <a
@@ -70,17 +124,15 @@ const Login = () => {
               </div>
             </div>
             <div>
-              <Button
-                type="button"
-                onClick={() => login()}
-                label="Connexion"
-                style="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              ></Button>
+              <Button onClick={() => login()} color="primary">
+                Connexion
+              </Button>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 };
+
 export default Login;
