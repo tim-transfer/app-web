@@ -2,7 +2,6 @@ import { Navigate } from "react-router-dom";
 import Login from "../auth/Login";
 import Dashboard from "../pages/dashboard/Dashboard";
 import ErrorPage from "./error-pages";
-import Registration from "../auth/Registration";
 import CompanyAddContainer from "../pages/company/companyAddPage/CompanyAddContainer";
 import UserAddContainer from "../pages/users/userAddPage/UserAddContainer";
 import UserListContainer from "../pages/users/userList/UserListContainer";
@@ -32,10 +31,6 @@ const routes = [
   {
     path: "/login",
     element: <Login />,
-  },
-  {
-    path: "/registration",
-    element: <Registration />,
   },
   {
     path: "/dashboard",
