@@ -35,6 +35,7 @@ const Dashboard = () => {
     localStorage.removeItem("token");
     console.log("Utilisateur déconnecté");
     navigate("/login");
+    window.location.reload();
   };
 
   return (

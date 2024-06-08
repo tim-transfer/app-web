@@ -42,6 +42,7 @@ const Login = () => {
         localStorage.setItem("idUser", response.data.idUser);
         localStorage.setItem("user", JSON.stringify(response.data.user));
         navigate("/dashboard");
+        window.location.reload();
       } else {
         console.log("Login failed: incorrect credentials");
         setOpen(true);

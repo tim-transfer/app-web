@@ -69,7 +69,7 @@ const CompanyListPage = ({
           border: "1px solid #e5e7eb",
           borderRadius: "0.375rem",
           boxShadow: "0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)",
-          marginTop: "1.5rem",
+          marginTop: "4em",
           width: "100em"
         }}
       >
