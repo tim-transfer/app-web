@@ -26,7 +26,6 @@ const Dashboard = () => {
           });
         }
       }
-      window.location.reload();
     } catch (error) {
       console.error("Erreur lors du parsing du JSON:", error);
     }
