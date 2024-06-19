@@ -27,7 +27,9 @@ const CompanyEditContainer = () => {
       if (companyResult.status === 200) {
         setCompany(companyResult.data.result);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const onChange = (c) => {
