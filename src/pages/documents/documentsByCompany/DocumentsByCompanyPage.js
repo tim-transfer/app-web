@@ -34,9 +34,7 @@ const DocumentsByCompanyPage = ({
     // Validate form data
     if (
       !formData.nameFile ||
-      !formData.dateButoire ||
-      !formData.extensionFile ||
-      !formData.position
+      !formData.dateButoire
     ) {
       setError(true);
     } else {
@@ -77,31 +75,6 @@ const DocumentsByCompanyPage = ({
                 />
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="h6">Extension du fichier</Typography>
-                <TextField
-                  id="extensionFile"
-                  name="extensionFile"
-                  variant="outlined"
-                  value={formData.extensionFile}
-                  onChange={onChange}
-                  fullWidth
-                  required
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Typography variant="h6">Position de la demande</Typography>
-                <TextField
-                  id="position"
-                  name="position"
-                  variant="outlined"
-                  type="number"
-                  value={formData.position}
-                  onChange={onChange}
-                  fullWidth
-                  required
-                />
-              </Grid>
-              <Grid item xs={12}>
                 <Button
                   type="submit"
                   variant="contained"
@@ -129,7 +102,6 @@ const DocumentsByCompanyPage = ({
                 <TableCell>Nom du fichier</TableCell>
                 <TableCell>Est rendu</TableCell>
                 <TableCell>Date limite de rendu</TableCell>
-                <TableCell>Extension du fichier</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -144,7 +116,6 @@ const DocumentsByCompanyPage = ({
                       locale: fr,
                     })}
                   </TableCell>
-                  <TableCell>{fileInformation.extensionFile}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

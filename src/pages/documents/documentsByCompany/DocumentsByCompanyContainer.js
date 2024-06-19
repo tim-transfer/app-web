@@ -10,6 +10,12 @@ const DocumentsByCompanyContainer = () => {
 
   const [fileInformations, setFilesInformations] = useState([]);
 
+  const [formData, setFormData] = useState({
+    nameFile: "",
+    dateButoire: new Date(),
+    position: "",
+  });
+
   useEffect(() => {
     loadDataFileInformations();
     loadData();
@@ -46,13 +52,6 @@ const DocumentsByCompanyContainer = () => {
     }
   };
 
-  const [formData, setFormData] = useState({
-    nameFile: "",
-    dateButoire: new Date(),
-    extensionFile: "",
-    position: "",
-  });
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -74,11 +73,9 @@ const DocumentsByCompanyContainer = () => {
     const fileInformationToSend = {
       nameFile: formData.nameFile,
       isActive: true,
-      position: formData.position,
       companyId: idCompanyParamInContainer,
       projectId: idProjectInContainer,
       dateButoire: formData.dateButoire,
-      extensionFile: formData.extensionFile,
     };
 
     try {
