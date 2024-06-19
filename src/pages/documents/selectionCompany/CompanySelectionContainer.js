@@ -25,7 +25,7 @@ const DocumentsSelectionByCompanyContainer = () => {
   };
 
   const selectCompany = (companyId) => {
-    window.location.href = `/documents/${companyId}`;
+    window.location.href = `/company/projects/${companyId}`;
   };
 
   return (

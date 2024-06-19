@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Container,
   Typography,
   Button,
   Table,
@@ -12,7 +11,6 @@ import {
   TextField
 } from "@mui/material";
 import View from "./../../../component/View";
-import InputText from "./../../../component/InputText";
 
 const UserListPage = ({ listUser, handleConfirmDelete, handleUpdate }) => {
   const itemsPerPage = 10;

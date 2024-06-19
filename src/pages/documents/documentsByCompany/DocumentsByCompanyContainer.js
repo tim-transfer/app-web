@@ -3,7 +3,8 @@ import DocumentsByCompanyPage from "./DocumentsByCompanyPage";
 import apiRequest from "../../../services/apiRequest";
 import { useParams } from "react-router-dom";
 const DocumentsByCompanyContainer = () => {
-  const { idParamInContainer } = useParams();
+  const { idCompanyParamInContainer } = useParams();
+  const { idProjectInContainer } = useParams();
 
   const [company, setCompany] = useState({});
 
@@ -18,7 +19,7 @@ const DocumentsByCompanyContainer = () => {
     try {
       // Fetch company data
       const companyResult = await apiRequest({
-        url: `company/${idParamInContainer}`,
+        url: `company/${idCompanyParamInContainer}`,
         method: "GET",
       });
 
@@ -33,7 +34,7 @@ const DocumentsByCompanyContainer = () => {
   const loadDataFileInformations = async () => {
     try {
       const fileInformationsResult = await apiRequest({
-        url: `fileInformations/byCompany/${idParamInContainer}`,
+        url: `fileInformations/byProject/${idProjectInContainer}`,
         method: "GET",
       });
 
@@ -74,7 +75,8 @@ const DocumentsByCompanyContainer = () => {
       nameFile: formData.nameFile,
       isActive: true,
       position: formData.position,
-      companyId: idParamInContainer,
+      companyId: idCompanyParamInContainer,
+      projectId: idProjectInContainer,
       dateButoire: formData.dateButoire,
       extensionFile: formData.extensionFile,
     };

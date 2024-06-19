@@ -11,6 +11,8 @@ import CompanyListContainer from "../pages/company/companyListPage/CompanyListCo
 import PasswordContainer from "../pages/changPassword/PasswordContainer";
 import DocumentsByCompanyContainer from "../pages/documents/documentsByCompany/DocumentsByCompanyContainer";
 import CompanySelectionContainer from "../pages/documents/selectionCompany/CompanySelectionContainer";
+import ProjectListContainer from "../pages/documents/project/projectsListPage/ProjectsListContainer";
+import ProjectAddContainer from "../pages/documents/project/projectAddList/ProjectAddContainer";
 
 const isAuthenticated = () => {
   return localStorage.getItem("token") != null;
@@ -63,12 +65,20 @@ const routes = [
     element: <ProtectedRoute element={<UserUpdateContainer />} />,
   },
   {
-    path: "/documents/:idParamInContainer",
+    path: "/documents/:idCompanyParamInContainer/:idProjectInContainer",
     element: <ProtectedRoute element={<DocumentsByCompanyContainer />} />,
   },
   {
     path: "/company/documents/selection",
     element: <ProtectedRoute element={<CompanySelectionContainer />} />,
+  },
+  {
+    path: "/company/projects/:idParamInContainer",
+    element: <ProtectedRoute element={<ProjectListContainer />} />,
+  },
+  {
+    path: "/company/project/add/:idParamInContainer",
+    element: <ProtectedRoute element={<ProjectAddContainer />} />,
   },
   {
     path: "/user/changFirstPassword/:idUser",
