@@ -40,7 +40,21 @@ const ProjectListContainer = () => {
     try {
       window.location.href = `/documents/${idParamInContainer}/${idProject}`;
     } catch (error) {
-      console.error(error);
+      console.error(
+        "Erreur lors de l'appel de la fonction loadInformationsFiles dans la classe : ProjectListContainer " +
+          error
+      );
+    }
+  };
+
+  const handleEditProject = (idProject) => {
+    try {
+      window.location.href = `/company/project/edit/${idProject}`;
+    } catch (error) {
+      console.error(
+        "Erreur lors du chargement de la page pour éditer le projet : " +
+          idProject
+      );
     }
   };
 
@@ -49,6 +63,7 @@ const ProjectListContainer = () => {
       projects={projects}
       addProject={addProject}
       loadInformationsFiles={loadInformationsFiles}
+      onEditProject={handleEditProject}
     ></ProjectListPage>
   );
 };

@@ -1,19 +1,22 @@
 import React, { useState } from "react";
-import {
-  Typography,
-  Button,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  TableContainer,
-  Grid,
-  Paper,
-  Container,
-} from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Table from "@mui/material/Table";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import TableBody from "@mui/material/TableBody";
+import TableContainer from "@mui/material/TableContainer";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Container from "@mui/material/Container";
 
-const ProjectListPage = ({ projects, addProject, loadInformationsFiles }) => {
+const ProjectListPage = ({
+  projects,
+  addProject,
+  loadInformationsFiles,
+  onEditProject,
+}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const projectsPerPage = 5;
   const totalPages = Math.ceil(projects.length / projectsPerPage);
@@ -86,6 +89,7 @@ const ProjectListPage = ({ projects, addProject, loadInformationsFiles }) => {
                         variant="contained"
                         color="primary"
                         size="small"
+                        onClick={() => onEditProject(project.id)}
                         style={{ marginRight: "0.5rem", textTransform: "none" }}
                       >
                         Modifier
